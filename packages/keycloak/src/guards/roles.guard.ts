@@ -67,16 +67,15 @@ export class RolesGuard implements CanActivate {
   }
 }
 
-const createProtectContext = (request: any, response: any) => (
-  keycloak: Keycloak,
-  spec: GaurdFn | string
-) =>
-  new Promise<boolean>((resolve, reject) =>
-    keycloak.protect(spec)(request, response, (next: any) => {
-      if (request.resourceDenied) {
-        resolve(false)
-      } else {
-        resolve(true)
-      }
-    })
-  )
+const createProtectContext =
+  (request: any, response: any) =>
+  (keycloak: Keycloak, spec: GaurdFn | string) =>
+    new Promise<boolean>((resolve, reject) =>
+      keycloak.protect(spec)(request, response, (next: any) => {
+        if (request.resourceDenied) {
+          resolve(false)
+        } else {
+          resolve(true)
+        }
+      })
+    )

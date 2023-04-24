@@ -22,7 +22,6 @@ export function parseConfig(): {
   try {
     if (config.has('typeOrm.connections')) {
       typeOrmConnections = config.get('typeOrm.connections')
-      
     }
   } catch (error) {
     throw new Error('typeOrm connections 不能为空')

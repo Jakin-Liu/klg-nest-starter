@@ -5,7 +5,6 @@ import * as Mock from 'mockjs'
 import { parseConfig } from './config.parse'
 
 export class MysqlTestDatabaseHelper {
-
   static async genFixtures(
     app: INestApplication,
     template: object,
@@ -20,7 +19,7 @@ export class MysqlTestDatabaseHelper {
       .fill(0)
       .map((it: object) => Mock.mock(template))
       .map(fixData)
-    
+
     Logger.debug('initFixtures ', items.length + '')
     for (const item of items) {
       const res = await model.save(item)
@@ -34,11 +33,9 @@ export class MysqlTestDatabaseHelper {
       const connect = app.get(getDataSourceToken(c.name))
 
       for (const repository of connect.manager.repositories) {
-
         const result = await repository.delete({})
         Logger.debug('result ', JSON.stringify(result))
       }
-      
 
       // for (const key of Object.keys(connect.)) {
       //   Logger.debug('delete ', key + '')
